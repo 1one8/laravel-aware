@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace OneOne8\LaravelChanges\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelChangesCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-changes';
 
     public $description = 'My command';
 
