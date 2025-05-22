@@ -1,5 +1,5 @@
 <?php
 
-use OneOne8\LaravelChanges\Tests\TestCase;
+use OneOne8\LaravelAware\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

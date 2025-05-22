@@ -4,24 +4,25 @@ return [
     /**
      * Enable tracking.
      */
-    'track' => true,
+    'track' => env('CHANGES_TRACK', true),
 
     /**
      * Automatically track changes for all models.
      */
-    'global' => true,
+    'global' => env('CHANGES_GLOBAL', true),
 
     /**
      * Track only during authenticated sessions.
      */
-    'authenticated' => true,
+    'authenticated' => env('CHANGES_AUTH', true),
 
     /**
      * Opt-out these models from tracking changes.
      *
      * Note:
-     * Overrides '$model->ignoreTracking()`.
-     * Overrides 'ModelIgnoresTracking` trait.
+     * Overrides `$model->ignoreTracking()`.
+     * Overrides `$model->ignoreTrackingEvents()`.
+     * Overrides `ModelIgnoresTracking` trait.
      */
     'ignore' => [],
 
@@ -30,7 +31,7 @@ return [
      * Set connection to 'sync' if you want processing to happen synchronously.
      */
     'jobs' => [
-        'connection' => env('CHANGES_QUEUE_CONNECTION', 'database'),
+        'connection' => env('CHANGES_QUEUE_CONNECTION', 'sync'),
         'queue' => env('CHANGES_QUEUE', 'default'),
     ],
 ];

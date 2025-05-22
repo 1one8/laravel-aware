@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Helpers;
+namespace OneOne8\LaravelAware\Helpers;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +16,11 @@ class Tracking
     public static function shouldTrackGlobal(): bool
     {
         return config('changes.track') && config('changes.global');
+    }
+
+    public static function shouldTrackManually(): bool
+    {
+        return config('changes.track') && !config('changes.global');
     }
 
     public static function shouldTrackAuthenticated(): bool

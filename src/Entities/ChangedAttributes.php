@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Entities;
+namespace OneOne8\LaravelAware\Entities;
 
 use Illuminate\Support\Collection;
 

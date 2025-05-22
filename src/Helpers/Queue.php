@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Helpers;
+namespace OneOne8\LaravelAware\Helpers;
 
 class Queue
 {

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Handlers;
+namespace OneOne8\LaravelAware\Helpers;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use OneOne8\LaravelChanges\Entities\ChangeActor;
+use OneOne8\LaravelAware\Entities\ChangeActor;
 
 class Actor
 {
     /**
      * @throws Exception
      */
-    public static function fetch(?Model $model = null): ChangeActor
+    public static function fetch(null|Model $model = null): ChangeActor
     {
         if ($model !== null && method_exists(
             $model,
@@ -31,7 +31,7 @@ class Actor
      */
     public static function make(
         object|string $actor,
-        ?string $actorId = null
+        null|string $actorId = null
     ): ChangeActor {
         if (is_string($actor) && class_exists($actor)) {
             return new ChangeActor(

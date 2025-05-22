@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges;
+namespace OneOne8\LaravelAware;
 
-use Illuminate\Database\Eloquent\Collection;
-use OneOne8\LaravelChanges\Enums\ChangeAction;
-use OneOne8\LaravelChanges\Models\Change;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+use OneOne8\LaravelAware\Enums\ChangeAction;
+use OneOne8\LaravelAware\Models\Change;
 
 class Who
 {
@@ -69,7 +71,7 @@ class Who
         string $referenceType,
         ChangeAction $action,
         ?string $referenceId = null
-    ) {
+    ): null|Collection|Model {
         $changes = self::getQuery(
             $referenceType,
             $action,
@@ -80,7 +82,7 @@ class Who
             return null;
         }
 
-        if ($changes instanceof Collection) {
+        if ($changes instanceof EloquentCollection) {
             return $changes->pluck('actor');
         }
 
@@ -91,7 +93,7 @@ class Who
         string $referenceType,
         ChangeAction $action,
         ?string $referenceId = null
-    ): Collection {
+    ): EloquentCollection {
         $changes = Change::where(
             'reference_type',
             $referenceType
@@ -112,12 +114,6 @@ class Who
             return $changes->first();
         }
 
-        $changes = $changes->get();
-
-        if ($changes instanceof Collection && $changes->count() == 1) {
-            return $changes->first();
-        }
-
-        return $changes;
+        return $changes->get();
     }
 }

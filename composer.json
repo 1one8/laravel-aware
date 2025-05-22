@@ -1,5 +1,5 @@
 {
-    "name": "one-one-8/laravel-changes",
+    "name": "one-one-8/laravel-aware",
     "description": "A simple auditing package to keep track of your Eloquent model changes",
     "version": "1.0.0",
     "keywords": [
@@ -7,7 +7,7 @@
         "laravel",
         "laravel-changes"
     ],
-    "homepage": "https://github.com/1one8/laravel-changes",
+    "homepage": "https://github.com/1one8/laravel-aware",
     "license": "MIT",
     "authors": [
         {
@@ -25,7 +25,6 @@
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.1.1||^7.10.0",
         "larastan/larastan": "^2.9||^3.0",
-        "orchestra/testbench": "^10.0.0||^9.0.0||^8.22.0",
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-arch": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.0",
@@ -35,35 +34,19 @@
     },
     "autoload": {
         "psr-4": {
-            "OneOne8\\LaravelChanges\\": "src/"
+            "OneOne8\\LaravelAware\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "OneOne8\\LaravelChanges\\Tests\\": "tests/",
-            "Workbench\\App\\": "workbench/app/",
-            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
-            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+            "OneOne8\\LaravelAware\\Tests\\": "tests/",
         }
     },
     "scripts": {
-        "post-autoload-dump": [
-            "@clear",
-            "@prepare",
-            "@composer run prepare"
-        ],
-        "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint",
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
-        "build": "@php vendor/bin/testbench workbench:build --ansi",
-        "serve": [
-            "Composer\\Config::disableProcessTimeout",
-            "@build",
-            "@php vendor/bin/testbench serve --ansi"
-        ],
         "lint": [
             "@php vendor/bin/pint --ansi",
             "@php vendor/bin/phpstan analyse --verbose --ansi"
@@ -79,7 +62,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "OneOne8\\LaravelChanges\\LaravelChangesServiceProvider"
+                "OneOne8\\LaravelAware\\LaravelAwareServiceProvider"
             ]
         }
     },

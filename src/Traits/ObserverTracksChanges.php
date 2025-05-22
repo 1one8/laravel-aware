@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Traits;
+namespace OneOne8\LaravelAware\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use OneOne8\LaravelChanges\Entities\ChangeData;
-use OneOne8\LaravelChanges\Enums\ChangeAction;
-use OneOne8\LaravelChanges\Jobs\ProcessChanges;
-use OneOne8\LaravelChanges\Tracker;
+use OneOne8\LaravelAware\Entities\ChangeData;
+use OneOne8\LaravelAware\Enums\ChangeAction;
+use OneOne8\LaravelAware\Helpers\Tracking;
+use OneOne8\LaravelAware\Jobs\ProcessChanges;
+use OneOne8\LaravelAware\Tracker;
 
 trait ObserverTracksChanges
 {
@@ -24,7 +25,13 @@ trait ObserverTracksChanges
      */
     public function creating(Model $model): void
     {
-        $this->tracker = Tracker::make($model, ChangeAction::CREATE);
+        if (Tracking::shouldTrackManually()){
+            $this->tracker = Tracker::make($model, ChangeAction::CREATE);
+        }
+
+        if (method_exists($this, 'isCreating')) {
+            $this->isCreating($model);
+        }
     }
 
     /**
@@ -32,7 +39,9 @@ trait ObserverTracksChanges
      */
     public function created(Model $model): void
     {
-        ProcessChanges::dispatch($this->tracker);
+        if (Tracking::shouldTrackManually()){
+            ProcessChanges::dispatch($this->tracker);
+        }
 
         if (method_exists($this, 'isCreated')) {
             $this->isCreated($model);
@@ -44,7 +53,13 @@ trait ObserverTracksChanges
      */
     public function deleting(Model $model): void
     {
-        $this->tracker = Tracker::make($model, ChangeAction::DELETE);
+        if (Tracking::shouldTrackManually()){
+            $this->tracker = Tracker::make($model, ChangeAction::DELETE);
+        }
+
+        if (method_exists($this, 'isDeleting')) {
+            $this->isDeleting($model);
+        }
     }
 
     /**
@@ -52,7 +67,9 @@ trait ObserverTracksChanges
      */
     public function deleted(Model $model): void
     {
-        ProcessChanges::dispatch($this->tracker);
+        if (Tracking::shouldTrackManually()){
+            ProcessChanges::dispatch($this->tracker);
+        }
 
         if (method_exists($this, 'isDeleted')) {
             $this->isDeleted($model);
@@ -64,15 +81,23 @@ trait ObserverTracksChanges
      */
     public function forceDeleting(Model $model): void
     {
-        $this->tracker = Tracker::make($model, ChangeAction::FORCE_DELETE);
+        if (Tracking::shouldTrackManually()){
+            $this->tracker = Tracker::make($model, ChangeAction::FORCE_DELETE);
+        }
+
+        if (method_exists($this, 'isForceDeleting')) {
+            $this->isForceDeleting($model);
+        }
     }
 
     /**
-     * Handle the model "force deleting" event.
+     * Handle the model "forceDeleted" event.
      */
     public function forceDeleted(Model $model): void
     {
-        ProcessChanges::dispatch($this->tracker);
+        if (Tracking::shouldTrackManually()){
+            ProcessChanges::dispatch($this->tracker);
+        }
 
         if (method_exists($this, 'isForceDeleted')) {
             $this->isForceDeleted($model);
@@ -84,7 +109,13 @@ trait ObserverTracksChanges
      */
     public function restoring(Model $model): void
     {
-        $this->tracker = Tracker::make($model, ChangeAction::RESTORE);
+        if (Tracking::shouldTrackManually()){
+            $this->tracker = Tracker::make($model, ChangeAction::RESTORE);
+        }
+
+        if (method_exists($this, 'isRestoring')) {
+            $this->isRestoring($model);
+        }
     }
 
     /**
@@ -92,7 +123,9 @@ trait ObserverTracksChanges
      */
     public function restored(Model $model): void
     {
-        ProcessChanges::dispatch($this->tracker);
+        if (Tracking::shouldTrackManually()){
+            ProcessChanges::dispatch($this->tracker);
+        }
 
         if (method_exists($this, 'isRestored')) {
             $this->isRestored($model);
@@ -104,7 +137,13 @@ trait ObserverTracksChanges
      */
     public function updating(Model $model): void
     {
-        $this->tracker = Tracker::make($model, ChangeAction::UPDATE);
+        if (Tracking::shouldTrackManually()){
+            $this->tracker = Tracker::make($model, ChangeAction::UPDATE);
+        }
+
+        if (method_exists($this, 'isUpdating')) {
+            $this->isUpdating($model);
+        }
     }
 
     /**
@@ -112,7 +151,9 @@ trait ObserverTracksChanges
      */
     public function updated(Model $model): void
     {
-        ProcessChanges::dispatch($this->tracker);
+        if (Tracking::shouldTrackManually()){
+            ProcessChanges::dispatch($this->tracker);
+        }
 
         if (method_exists($this, 'isUpdated')) {
             $this->isUpdated($model);

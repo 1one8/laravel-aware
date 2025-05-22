@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Events;
+namespace OneOne8\LaravelAware\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use OneOne8\LaravelChanges\Entities\ChangedAttributes;
+use OneOne8\LaravelAware\Entities\ChangedAttributes;
 
 class TrackingChangesFailed
 {

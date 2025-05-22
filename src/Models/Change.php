@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Models;
+namespace OneOne8\LaravelAware\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
-use OneOne8\LaravelChanges\Entities\ChangedAttributes;
-use OneOne8\LaravelChanges\Enums\ChangeAction;
-use OneOne8\LaravelChanges\Enums\ChangedUsing;
+use OneOne8\LaravelAware\Entities\ChangedAttributes;
+use OneOne8\LaravelAware\Enums\ChangeAction;
+use OneOne8\LaravelAware\Enums\ChangedUsing;
 
 /**
  * Class representing an entity.
@@ -46,7 +46,6 @@ class Change extends Model
         'action' => ChangeAction::class,
         'changed_using' => ChangedUsing::class,
         'changed_at' => 'datetime',
-        'changes_approved_at' => 'datetime',
         'changed_from' => 'array',
         'changed_to' => 'array',
         'changes' => 'array',

@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Events;
+namespace OneOne8\LaravelAware\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use OneOne8\LaravelChanges\Entities\ChangedAttributes;
+use OneOne8\LaravelAware\Entities\ChangedAttributes;
+use OneOne8\LaravelAware\Models\Change;
 
-class TrackingChangesSucceeded
+class TrackingChangesCompleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,7 +20,7 @@ class TrackingChangesSucceeded
      */
     public function __construct(
         public Model $model,
-        public ChangedAttributes $changes
+        public Change $change
     ) {
         //
     }

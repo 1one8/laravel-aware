@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Handlers;
+namespace OneOne8\LaravelAware\Processors;
 
 use Carbon\Carbon;
 use Exception;
@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-use OneOne8\LaravelChanges\Entities\ChangeActor;
-use OneOne8\LaravelChanges\Entities\ChangedAttributes;
-use OneOne8\LaravelChanges\Enums\ChangeAction;
-use OneOne8\LaravelChanges\Enums\ChangedUsing;
-use OneOne8\LaravelChanges\Events\TrackingChangesFailed;
-use OneOne8\LaravelChanges\Events\TrackingChangesStarted;
-use OneOne8\LaravelChanges\Events\TrackingChangesSucceeded;
-use OneOne8\LaravelChanges\Models\Change;
+use OneOne8\LaravelAware\Entities\ChangeActor;
+use OneOne8\LaravelAware\Entities\ChangedAttributes;
+use OneOne8\LaravelAware\Enums\ChangeAction;
+use OneOne8\LaravelAware\Enums\ChangedUsing;
+use OneOne8\LaravelAware\Events\TrackingChangesFailed;
+use OneOne8\LaravelAware\Events\TrackingChangesStarted;
+use OneOne8\LaravelAware\Events\TrackingChangesCompleted;
+use OneOne8\LaravelAware\Models\Change;
 
 class Changes
 {
@@ -47,14 +47,11 @@ class Changes
         ChangedAttributes $changes,
         Model $model
     ): void {
-        foreach ($changes->changes as $key => $value) {
-            $model->$key = $value;
-        }
-
+        $model->fill($changes->changes);
         $model->saveQuietly();
     }
 
-    protected function changedUsing(): ?ChangedUsing
+    protected function changedUsing(): ChangedUsing
     {
         if (APP::runningInConsole()) {
             return ChangedUsing::CONSOLE;
@@ -182,7 +179,7 @@ class Changes
             'changed_to' => $changedTo,
             'changes' => $changed,
             'changed_using' => $changedUsing,
-            'changed_with' => $changedUsing === ChangedUsing::CONSOLE ? 'console' : Route::currentRouteAction(),
+            'changed_with' => $changedUsing === ChangedUsing::CONSOLE ? $changedUsing->value : Route::currentRouteAction(),
             'ip_address' => request()->ip(),
             'action' => $action,
             'changed_at' => Carbon::now(),
@@ -208,12 +205,11 @@ class Changes
         try {
             Change::withoutEvents(
                 function () use (
-                    $changes,
                     $model,
                     $record
                 ) {
-                    Change::create($record);
-                    TrackingChangesSucceeded::dispatch($model, $changes);
+                    $change = Change::create($record);
+                    TrackingChangesCompleted::dispatch($model, $change);
                 }
             );
         } catch (Exception $e) {

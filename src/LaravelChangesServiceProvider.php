@@ -1,10 +1,10 @@
 <?php
 
-namespace OneOne8\LaravelChanges;
+namespace OneOne8\LaravelAware;
 
-use OneOne8\LaravelChanges\Commands\LaravelChangesCommand;
-use OneOne8\LaravelChanges\Handlers\EloquentEvents;
-use OneOne8\LaravelChanges\Helpers\Tracking;
+use OneOne8\LaravelAware\Commands\LaravelAwareCommand;
+use OneOne8\LaravelAware\Processors\EloquentEvents;
+use OneOne8\LaravelAware\Helpers\Tracking;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -20,14 +20,13 @@ class LaravelChangesServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-changes')
             ->hasConfigFile()
-            ->hasMigration('create_changes_table')
-            ->hasCommand(LaravelChangesCommand::class);
+            ->hasMigration('create_changes_table');
     }
 
     public function bootingPackage()
     {
         if (Tracking::shouldTrackGlobal()) {
-            EloquentEvents::make()->watch();
+            EloquentEvents::make()->listen();
         }
     }
 }

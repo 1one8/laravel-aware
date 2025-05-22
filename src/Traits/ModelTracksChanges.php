@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Traits;
+namespace OneOne8\LaravelAware\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use OneOne8\LaravelChanges\Entities\ChangeData;
-use OneOne8\LaravelChanges\Enums\ChangeAction;
-use OneOne8\LaravelChanges\Helpers\Tracking;
-use OneOne8\LaravelChanges\Jobs\ProcessChanges;
-use OneOne8\LaravelChanges\Tracker;
+use OneOne8\LaravelAware\Entities\ChangeData;
+use OneOne8\LaravelAware\Enums\ChangeAction;
+use OneOne8\LaravelAware\Helpers\Tracking;
+use OneOne8\LaravelAware\Jobs\ProcessChanges;
+use OneOne8\LaravelAware\Tracker;
 
 /**
  * @method static void creating(callable $callback)
@@ -32,7 +32,7 @@ trait ModelTracksChanges
      */
     protected static function booted(): void
     {
-        if (Tracking::shouldTrack()) {
+        if (Tracking::shouldTrackManually()) {
 
             self::creating(function (Model $model) {
                 $this->tracker = Tracker::make($model, ChangeAction::CREATE);

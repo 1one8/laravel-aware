@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Handlers;
+namespace OneOne8\LaravelAware\Processors;
 
 use Illuminate\Support\Facades\Event;
-use OneOne8\LaravelChanges\Entities\ChangeData;
-use OneOne8\LaravelChanges\Enums\ChangeAction;
-use OneOne8\LaravelChanges\Jobs\ProcessBulkChanges;
-use OneOne8\LaravelChanges\Tracker;
+use OneOne8\LaravelAware\Entities\ChangeData;
+use OneOne8\LaravelAware\Enums\ChangeAction;
+use OneOne8\LaravelAware\Jobs\ProcessBulkChanges;
+use OneOne8\LaravelAware\Tracker;
 
 /**
  * @property ChangeData[] $trackers
@@ -22,7 +22,7 @@ class EloquentEvents
         return new static;
     }
 
-    public function watch(): void
+    public function listen(): void
     {
         Event::listen(
             ['eloquent.creating: *'],
@@ -30,7 +30,7 @@ class EloquentEvents
                 string $eventName,
                 array $data
             ) {
-                return $this->track($data, ChangeAction::CREATE);
+                $this->track($data, ChangeAction::CREATE);
             }
         );
 
@@ -47,7 +47,7 @@ class EloquentEvents
                 string $eventName,
                 array $data
             ) {
-                return $this->track($data, ChangeAction::DELETE);
+                $this->track($data, ChangeAction::DELETE);
             }
         );
 
@@ -64,7 +64,7 @@ class EloquentEvents
                 string $eventName,
                 array $data
             ) {
-                return $this->track($data, ChangeAction::FORCE_DELETE);
+                $this->track($data, ChangeAction::FORCE_DELETE);
             }
         );
 
@@ -81,7 +81,7 @@ class EloquentEvents
                 string $eventName,
                 array $data
             ) {
-                return $this->track($data, ChangeAction::UPDATE);
+                $this->track($data, ChangeAction::UPDATE);
             }
         );
 
@@ -98,7 +98,7 @@ class EloquentEvents
                 string $eventName,
                 array $data
             ) {
-                return $this->track($data, ChangeAction::RESTORE);
+                $this->track($data, ChangeAction::RESTORE);
             }
         );
 

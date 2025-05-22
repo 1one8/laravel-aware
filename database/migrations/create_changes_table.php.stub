@@ -57,22 +57,12 @@ return new class extends Migration
 
                     $table->enum(
                         'action',
-                        [
-                            'create',
-                            'delete',
-                            'force_delete',
-                            'update',
-                            'restore',
-                        ]
+                        \App\Auditing\Enums\ChangeAction::values()
                     )
                         ->default('create');
                     $table->enum(
                         'changed_using',
-                        [
-                            'api',
-                            'console',
-                            'web'
-                        ]
+                        \App\Auditing\Enums\ChangedUsing::values()
                     )
                         ->nullable()
                         ->default(null);

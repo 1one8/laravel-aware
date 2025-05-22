@@ -1,16 +1,16 @@
 <?php
 
-namespace OneOne8\LaravelChanges\Jobs;
+namespace OneOne8\LaravelAware\Jobs;
 
 use Exception;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
-use OneOne8\LaravelChanges\Entities\ChangeData;
-use OneOne8\LaravelChanges\Handlers\Actor;
-use OneOne8\LaravelChanges\Handlers\Changes;
-use OneOne8\LaravelChanges\Handlers\Ignore;
-use OneOne8\LaravelChanges\Helpers\Queue;
-use OneOne8\LaravelChanges\Helpers\Tracking;
+use OneOne8\LaravelAware\Entities\ChangeData;
+use OneOne8\LaravelAware\Helpers\Actor;
+use OneOne8\LaravelAware\Processors\Changes;
+use OneOne8\LaravelAware\Helpers\Ignore;
+use OneOne8\LaravelAware\Helpers\Queue;
+use OneOne8\LaravelAware\Helpers\Tracking;
 
 class ProcessBulkChanges implements ShouldQueue
 {

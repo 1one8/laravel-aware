@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace OneOne8\LaravelChanges\Traits;
+namespace OneOne8\LaravelAware\Traits;
 
-use OneOne8\LaravelChanges\Enums\ChangeAction;
+use OneOne8\LaravelAware\Enums\ChangeAction;
 
 trait ModelIgnoresTracking
 {
