@@ -25,7 +25,7 @@ trait ObserverTracksChanges
      */
     public function creating(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             $this->tracker = Tracker::make($model, ChangeAction::CREATE);
         }
 
@@ -39,7 +39,7 @@ trait ObserverTracksChanges
      */
     public function created(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             ProcessChanges::dispatch($this->tracker);
         }
 
@@ -53,7 +53,7 @@ trait ObserverTracksChanges
      */
     public function deleting(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             $this->tracker = Tracker::make($model, ChangeAction::DELETE);
         }
 
@@ -67,7 +67,7 @@ trait ObserverTracksChanges
      */
     public function deleted(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             ProcessChanges::dispatch($this->tracker);
         }
 
@@ -81,7 +81,7 @@ trait ObserverTracksChanges
      */
     public function forceDeleting(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             $this->tracker = Tracker::make($model, ChangeAction::FORCE_DELETE);
         }
 
@@ -95,7 +95,7 @@ trait ObserverTracksChanges
      */
     public function forceDeleted(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             ProcessChanges::dispatch($this->tracker);
         }
 
@@ -109,7 +109,7 @@ trait ObserverTracksChanges
      */
     public function restoring(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             $this->tracker = Tracker::make($model, ChangeAction::RESTORE);
         }
 
@@ -123,7 +123,7 @@ trait ObserverTracksChanges
      */
     public function restored(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             ProcessChanges::dispatch($this->tracker);
         }
 
@@ -137,7 +137,7 @@ trait ObserverTracksChanges
      */
     public function updating(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             $this->tracker = Tracker::make($model, ChangeAction::UPDATE);
         }
 
@@ -151,7 +151,7 @@ trait ObserverTracksChanges
      */
     public function updated(Model $model): void
     {
-        if (Tracking::shouldTrackManually()){
+        if (Tracking::shouldTrackManually()) {
             ProcessChanges::dispatch($this->tracker);
         }
 

@@ -2,9 +2,8 @@
 
 namespace OneOne8\LaravelAware;
 
-use OneOne8\LaravelAware\Commands\LaravelAwareCommand;
-use OneOne8\LaravelAware\Processors\EloquentEvents;
 use OneOne8\LaravelAware\Helpers\Tracking;
+use OneOne8\LaravelAware\Processors\EloquentEvents;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

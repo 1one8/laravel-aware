@@ -20,7 +20,7 @@ class Tracking
 
     public static function shouldTrackManually(): bool
     {
-        return config('changes.track') && !config('changes.global');
+        return config('changes.track') && ! config('changes.global');
     }
 
     public static function shouldTrackAuthenticated(): bool

@@ -8,7 +8,6 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use OneOne8\LaravelAware\Entities\ChangedAttributes;
 use OneOne8\LaravelAware\Models\Change;
 
 class TrackingChangesCompleted

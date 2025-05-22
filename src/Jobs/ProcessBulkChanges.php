@@ -7,10 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use OneOne8\LaravelAware\Entities\ChangeData;
 use OneOne8\LaravelAware\Helpers\Actor;
-use OneOne8\LaravelAware\Processors\Changes;
 use OneOne8\LaravelAware\Helpers\Ignore;
 use OneOne8\LaravelAware\Helpers\Queue;
 use OneOne8\LaravelAware\Helpers\Tracking;
+use OneOne8\LaravelAware\Processors\Changes;
 
 class ProcessBulkChanges implements ShouldQueue
 {

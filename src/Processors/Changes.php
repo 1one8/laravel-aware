@@ -14,9 +14,9 @@ use OneOne8\LaravelAware\Entities\ChangeActor;
 use OneOne8\LaravelAware\Entities\ChangedAttributes;
 use OneOne8\LaravelAware\Enums\ChangeAction;
 use OneOne8\LaravelAware\Enums\ChangedUsing;
+use OneOne8\LaravelAware\Events\TrackingChangesCompleted;
 use OneOne8\LaravelAware\Events\TrackingChangesFailed;
 use OneOne8\LaravelAware\Events\TrackingChangesStarted;
-use OneOne8\LaravelAware\Events\TrackingChangesCompleted;
 use OneOne8\LaravelAware\Models\Change;
 
 class Changes

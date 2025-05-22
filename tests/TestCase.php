@@ -3,7 +3,6 @@
 namespace OneOne8\LaravelAware\Tests;
 
 use Illuminate\Support\Facades\File;
-use OneOne8\LaravelAware\LaravelAwareServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
