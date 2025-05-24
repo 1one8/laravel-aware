@@ -7,7 +7,7 @@ namespace OneOne8\LaravelAware\Entities;
 class ChangeActor
 {
     public function __construct(
-        public null|string $actorClass,
+        public ?string $actorClass,
         public null|int|string $actorId
     ) {}
 }

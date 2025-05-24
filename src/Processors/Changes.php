@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OneOne8\LaravelAware\Processors;
 
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;

@@ -9,7 +9,6 @@ use OneOne8\LaravelAware\Entities\ChangeData;
 use OneOne8\LaravelAware\Helpers\Actor;
 use OneOne8\LaravelAware\Helpers\Ignore;
 use OneOne8\LaravelAware\Helpers\Queue;
-use OneOne8\LaravelAware\Helpers\Tracking;
 use OneOne8\LaravelAware\Processors\Changes;
 
 class ProcessChanges implements ShouldQueue

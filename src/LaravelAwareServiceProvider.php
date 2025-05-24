@@ -21,9 +21,9 @@ class LaravelAwareServiceProvider extends PackageServiceProvider
             ->name('laravel-aware')
             ->hasConfigFile()
             ->discoversMigrations()
-            ->hasInstallCommand(function(InstallCommand $command) {
+            ->hasInstallCommand(function (InstallCommand $command) {
                 $command
-                    ->startWith(function(InstallCommand $command) {
+                    ->startWith(function (InstallCommand $command) {
                         $command->info('Hello, let\'s get aware installed!');
                     })
                     ->publishConfigFile()

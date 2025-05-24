@@ -14,7 +14,7 @@ class Actor
     /**
      * @throws Exception
      */
-    public static function fetch(null|Model $model = null): ChangeActor
+    public static function fetch(?Model $model = null): ChangeActor
     {
         if ($model !== null && method_exists(
             $model,
