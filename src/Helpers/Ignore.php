@@ -34,7 +34,7 @@ class Ignore
 
         if (in_array(
             get_class($model),
-            config('changes.ignore')
+            config('aware.ignore')
         )) {
             $ignore = true;
         }

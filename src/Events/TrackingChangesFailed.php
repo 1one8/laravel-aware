@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use OneOne8\LaravelAware\Entities\ChangedAttributes;
+use Throwable;
 
 class TrackingChangesFailed
 {
@@ -19,7 +20,8 @@ class TrackingChangesFailed
      */
     public function __construct(
         public Model $model,
-        public ChangedAttributes $changes
+        public ChangedAttributes $changes,
+        public Throwable $exception,
     ) {
         //
     }

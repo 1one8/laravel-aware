@@ -29,9 +29,10 @@ trait ObserverTracksChanges
             $this->tracker = Tracker::make($model, ChangeAction::CREATE);
         }
 
-        if (method_exists($this, 'isCreating')) {
-            $this->isCreating($model);
-        }
+        $this->callAwareMethod(
+            method: 'isCreating',
+            model: $model
+        );
     }
 
     /**
@@ -43,9 +44,10 @@ trait ObserverTracksChanges
             ProcessChanges::dispatch($this->tracker);
         }
 
-        if (method_exists($this, 'isCreated')) {
-            $this->isCreated($model);
-        }
+        $this->callAwareMethod(
+            method: 'isCreated',
+            model: $model
+        );
     }
 
     /**
@@ -57,9 +59,10 @@ trait ObserverTracksChanges
             $this->tracker = Tracker::make($model, ChangeAction::DELETE);
         }
 
-        if (method_exists($this, 'isDeleting')) {
-            $this->isDeleting($model);
-        }
+        $this->callAwareMethod(
+            method: 'isDeleting',
+            model: $model
+        );
     }
 
     /**
@@ -71,9 +74,10 @@ trait ObserverTracksChanges
             ProcessChanges::dispatch($this->tracker);
         }
 
-        if (method_exists($this, 'isDeleted')) {
-            $this->isDeleted($model);
-        }
+        $this->callAwareMethod(
+            method: 'isDeleted',
+            model: $model
+        );
     }
 
     /**
@@ -85,9 +89,10 @@ trait ObserverTracksChanges
             $this->tracker = Tracker::make($model, ChangeAction::FORCE_DELETE);
         }
 
-        if (method_exists($this, 'isForceDeleting')) {
-            $this->isForceDeleting($model);
-        }
+        $this->callAwareMethod(
+            method: 'isForceDeleting',
+            model: $model
+        );
     }
 
     /**
@@ -99,9 +104,10 @@ trait ObserverTracksChanges
             ProcessChanges::dispatch($this->tracker);
         }
 
-        if (method_exists($this, 'isForceDeleted')) {
-            $this->isForceDeleted($model);
-        }
+        $this->callAwareMethod(
+            method: 'isForceDeleted',
+            model: $model
+        );
     }
 
     /**
@@ -113,9 +119,10 @@ trait ObserverTracksChanges
             $this->tracker = Tracker::make($model, ChangeAction::RESTORE);
         }
 
-        if (method_exists($this, 'isRestoring')) {
-            $this->isRestoring($model);
-        }
+        $this->callAwareMethod(
+            method: 'isRestoring',
+            model: $model
+        );
     }
 
     /**
@@ -127,9 +134,10 @@ trait ObserverTracksChanges
             ProcessChanges::dispatch($this->tracker);
         }
 
-        if (method_exists($this, 'isRestored')) {
-            $this->isRestored($model);
-        }
+        $this->callAwareMethod(
+            method: 'isRestored',
+            model: $model
+        );
     }
 
     /**
@@ -141,9 +149,10 @@ trait ObserverTracksChanges
             $this->tracker = Tracker::make($model, ChangeAction::UPDATE);
         }
 
-        if (method_exists($this, 'isUpdating')) {
-            $this->isUpdating($model);
-        }
+        $this->callAwareMethod(
+            method: 'isUpdating',
+            model: $model
+        );
     }
 
     /**
@@ -155,8 +164,16 @@ trait ObserverTracksChanges
             ProcessChanges::dispatch($this->tracker);
         }
 
-        if (method_exists($this, 'isUpdated')) {
-            $this->isUpdated($model);
+        $this->callAwareMethod(
+            method: 'isUpdated',
+            model: $model
+        );
+    }
+
+    private function callAwareMethod(string $method, Model $model): void
+    {
+        if (method_exists($this, $method)) {
+            $this->{$method}($model);
         }
     }
 }

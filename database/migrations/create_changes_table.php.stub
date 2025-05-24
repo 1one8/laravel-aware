@@ -29,15 +29,16 @@ return new class extends Migration
                     $table->id();
 
                     /**
-                     * Uncomment if your models use UUID
+                     * Uncomment the following two lines if your models use UUID
                      */
                     // $table->nullableUuidMorphs('actor');
                     // $table->uuidMorphs('reference');
                     /**
-                     * Remove if your models use UUID
+                     * Comment out or remove the following two lines if your models use UUID
                      */
                     $table->nullableMorphs('actor');
                     $table->morphs('reference');
+                    /** ---------------------------------------------------------------------*/
 
                     $table->string('ip_address')
                         ->nullable()
@@ -57,12 +58,12 @@ return new class extends Migration
 
                     $table->enum(
                         'action',
-                        \App\Auditing\Enums\ChangeAction::values()
+                        \OneOne8\LaravelAware\Enums\ChangeAction::values()
                     )
                         ->default('create');
                     $table->enum(
                         'changed_using',
-                        \App\Auditing\Enums\ChangedUsing::values()
+                        \OneOne8\LaravelAware\Enums\ChangedUsing::values()
                     )
                         ->nullable()
                         ->default(null);

@@ -12,7 +12,7 @@ use OneOne8\LaravelAware\Helpers\Queue;
 use OneOne8\LaravelAware\Helpers\Tracking;
 use OneOne8\LaravelAware\Processors\Changes;
 
-class ProcessBulkChanges implements ShouldQueue
+class ProcessGlobalChanges implements ShouldQueue
 {
     use Queueable;
 
@@ -34,16 +34,14 @@ class ProcessBulkChanges implements ShouldQueue
      */
     public function handle(): void
     {
-        if (Tracking::shouldTrackAuthenticated()) {
-            foreach ($this->data as $data) {
-                if (! Ignore::model($data->model, $data->action)) {
-                    Changes::by(Actor::fetch($data->model))
-                        ->trackChanges(
-                            $data->model,
-                            $data->action,
-                            $data->changes
-                        );
-                }
+        foreach ($this->data as $data) {
+            if (! Ignore::model($data->model, $data->action)) {
+                Changes::by(Actor::fetch($data->model))
+                    ->trackChanges(
+                        $data->model,
+                        $data->action,
+                        $data->changes
+                    );
             }
         }
     }

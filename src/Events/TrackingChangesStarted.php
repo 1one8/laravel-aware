@@ -17,7 +17,8 @@ class TrackingChangesStarted
      * Create a new event instance.
      */
     public function __construct(
-        public Model $model
+        public Model $model,
+        public array $changes
     ) {
         //
     }

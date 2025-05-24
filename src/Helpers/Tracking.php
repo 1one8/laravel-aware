@@ -10,23 +10,20 @@ class Tracking
 {
     public static function shouldTrack(): bool
     {
-        return config('changes.track');
+        if (config('aware.authenticated')) {
+            return config('aware.track') && Auth::check();
+        }
+
+        return config('aware.track');
     }
 
     public static function shouldTrackGlobal(): bool
     {
-        return config('changes.track') && config('changes.global');
+        return static::shouldTrack() && config('aware.global');
     }
 
     public static function shouldTrackManually(): bool
     {
-        return config('changes.track') && ! config('changes.global');
-    }
-
-    public static function shouldTrackAuthenticated(): bool
-    {
-        $track = ! config('changes.authenticated') || Auth::check();
-
-        return static::shouldTrack() && $track;
+        return static::shouldTrack() && !config('aware.global');
     }
 }

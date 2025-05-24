@@ -8,11 +8,11 @@ class Queue
 {
     public static function connection(): string
     {
-        return config('changes.jobs.connection');
+        return config('aware.jobs.connection');
     }
 
     public static function queue(): string
     {
-        return config('changes.jobs.queue');
+        return config('aware.jobs.queue');
     }
 }

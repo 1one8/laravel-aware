@@ -34,15 +34,13 @@ class ProcessChanges implements ShouldQueue
      */
     public function handle(): void
     {
-        if (Tracking::shouldTrackAuthenticated()) {
-            if (! Ignore::model($this->data->model, $this->data->action)) {
-                Changes::by(Actor::fetch($this->data->model))
-                    ->trackChanges(
-                        $this->data->model,
-                        $this->data->action,
-                        $this->data->changes
-                    );
-            }
+        if (! Ignore::model($this->data->model, $this->data->action)) {
+            Changes::by(Actor::fetch($this->data->model))
+                ->trackChanges(
+                    $this->data->model,
+                    $this->data->action,
+                    $this->data->changes
+                );
         }
     }
 }

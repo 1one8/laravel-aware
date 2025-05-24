@@ -4,17 +4,17 @@ return [
     /**
      * Enable tracking.
      */
-    'track' => env('CHANGES_TRACK', true),
+    'track' => env('AWARE_TRACK', true),
 
     /**
      * Automatically track changes for all models.
      */
-    'global' => env('CHANGES_GLOBAL', true),
+    'global' => env('AWARE_GLOBAL', true),
 
     /**
      * Track only during authenticated sessions.
      */
-    'authenticated' => env('CHANGES_AUTH', true),
+    'authenticated' => env('AWARE_AUTH', true),
 
     /**
      * Opt-out these models from tracking changes.
@@ -31,7 +31,7 @@ return [
      * Set connection to 'sync' if you want processing to happen synchronously.
      */
     'jobs' => [
-        'connection' => env('CHANGES_QUEUE_CONNECTION', 'sync'),
-        'queue' => env('CHANGES_QUEUE', 'default'),
+        'connection' => env('AWARE_QUEUE_CONNECTION', 'sync'),
+        'queue' => env('AWARE_QUEUE', 'default'),
     ],
 ];

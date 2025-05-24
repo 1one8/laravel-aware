@@ -7,7 +7,7 @@ namespace OneOne8\LaravelAware\Processors;
 use Illuminate\Support\Facades\Event;
 use OneOne8\LaravelAware\Entities\ChangeData;
 use OneOne8\LaravelAware\Enums\ChangeAction;
-use OneOne8\LaravelAware\Jobs\ProcessBulkChanges;
+use OneOne8\LaravelAware\Jobs\ProcessGlobalChanges;
 use OneOne8\LaravelAware\Tracker;
 
 /**
@@ -37,7 +37,7 @@ class EloquentEvents
         Event::listen(
             ['eloquent.created: *'],
             function () {
-                ProcessBulkChanges::dispatch($this->trackers);
+                ProcessGlobalChanges::dispatch($this->trackers);
             }
         );
 
@@ -54,7 +54,7 @@ class EloquentEvents
         Event::listen(
             ['eloquent.deleted: *'],
             function () {
-                ProcessBulkChanges::dispatch($this->trackers);
+                ProcessGlobalChanges::dispatch($this->trackers);
             }
         );
 
@@ -71,7 +71,7 @@ class EloquentEvents
         Event::listen(
             ['eloquent.forceDeleted: *'],
             function () {
-                ProcessBulkChanges::dispatch($this->trackers);
+                ProcessGlobalChanges::dispatch($this->trackers);
             }
         );
 
@@ -88,7 +88,7 @@ class EloquentEvents
         Event::listen(
             ['eloquent.updated: *'],
             function () {
-                ProcessBulkChanges::dispatch($this->trackers);
+                ProcessGlobalChanges::dispatch($this->trackers);
             }
         );
 
@@ -105,7 +105,7 @@ class EloquentEvents
         Event::listen(
             ['eloquent.restored: *'],
             function () {
-                ProcessBulkChanges::dispatch($this->trackers);
+                ProcessGlobalChanges::dispatch($this->trackers);
             }
         );
     }

@@ -18,6 +18,7 @@ use OneOne8\LaravelAware\Events\TrackingChangesCompleted;
 use OneOne8\LaravelAware\Events\TrackingChangesFailed;
 use OneOne8\LaravelAware\Events\TrackingChangesStarted;
 use OneOne8\LaravelAware\Models\Change;
+use Throwable;
 
 class Changes
 {
@@ -194,13 +195,13 @@ class Changes
         ChangeAction $action,
         ChangedAttributes $changes
     ): void {
-        TrackingChangesStarted::dispatch($model);
-
         $record = $this->getRecord(
             $model,
             $changes,
             $action
         );
+
+        TrackingChangesStarted::dispatch($model, $record);
 
         try {
             Change::withoutEvents(
@@ -212,8 +213,8 @@ class Changes
                     TrackingChangesCompleted::dispatch($model, $change);
                 }
             );
-        } catch (Exception $e) {
-            TrackingChangesFailed::dispatch($model, $changes);
+        } catch (Throwable $e) {
+            TrackingChangesFailed::dispatch($model, $changes, $e);
         }
     }
 }

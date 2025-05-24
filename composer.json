@@ -4,8 +4,11 @@
     "version": "1.0.0",
     "keywords": [
         "1one8",
+        "one-one-8",
         "laravel",
-        "laravel-changes"
+        "laravel-aware",
+        "aware",
+        "audit"
     ],
     "homepage": "https://github.com/1one8/laravel-aware",
     "license": "MIT",
@@ -17,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^8.4",
+        "php": "^8.1",
         "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0||^12.0"
     },
@@ -39,7 +42,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "OneOne8\\LaravelAware\\Tests\\": "tests/",
+            "OneOne8\\LaravelAware\\Tests\\": "tests/"
         }
     },
     "scripts": {

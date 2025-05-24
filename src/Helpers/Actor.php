@@ -14,7 +14,7 @@ class Actor
     /**
      * @throws Exception
      */
-    public static function fetch(?Model $model = null): ChangeActor
+    public static function fetch(null|Model $model = null): ChangeActor
     {
         if ($model !== null && method_exists(
             $model,
@@ -23,7 +23,11 @@ class Actor
             return $model::getActor();
         }
 
-        return self::authActor();
+        if (config('aware.authenticated') && Auth::check()) {
+            return self::authActor();
+        }
+
+        return self::nullActor();
     }
 
     /**
@@ -35,16 +39,16 @@ class Actor
     ): ChangeActor {
         if (is_string($actor) && class_exists($actor)) {
             return new ChangeActor(
-                $actor,
-                $actorId
+                actorClass: $actor,
+                actorId: $actorId
             );
         }
 
         $id = $actor->id ?? $actorId;
 
         return new ChangeActor(
-            get_class($actor),
-            $id
+            actorClass: get_class($actor),
+            actorId: $id
         );
     }
 
@@ -56,8 +60,19 @@ class Actor
         $user = Auth::user();
 
         return new ChangeActor(
-            get_class($user),
-            Auth::id()
+            actorClass: get_class($user),
+            actorId: Auth::id()
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    private static function nullActor(): ChangeActor
+    {
+        return new ChangeActor(
+            actorClass: null,
+            actorId: null
         );
     }
 }

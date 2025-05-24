@@ -4,10 +4,11 @@ namespace OneOne8\LaravelAware;
 
 use OneOne8\LaravelAware\Helpers\Tracking;
 use OneOne8\LaravelAware\Processors\EloquentEvents;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class LaravelChangesServiceProvider extends PackageServiceProvider
+class LaravelAwareServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -17,9 +18,18 @@ class LaravelChangesServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-changes')
+            ->name('laravel-aware')
             ->hasConfigFile()
-            ->hasMigration('create_changes_table');
+            ->discoversMigrations()
+            ->hasInstallCommand(function(InstallCommand $command) {
+                $command
+                    ->startWith(function(InstallCommand $command) {
+                        $command->info('Hello, let\'s get aware installed!');
+                    })
+                    ->publishConfigFile()
+                    ->publishMigrations()
+                    ->askToStarRepoOnGitHub('1one8/laravel-aware');
+            });
     }
 
     public function bootingPackage()
